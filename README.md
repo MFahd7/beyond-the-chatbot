@@ -52,7 +52,7 @@ npm run dev          # http://localhost:3000
 ```
 
 ```bash
-npm test             # 47 tests, including both named failure cases
+npm test             # 48 tests, including both named failure cases
 npm run typecheck
 npm run build
 ```
@@ -182,7 +182,8 @@ filing on its own and leaves the talking to a human.** On the `needs_repro` swee
 model is most confident about (≥ 0.70) have their label applied automatically after a **45-second
 visible countdown**; the comments and closes in the same set wait. Any keystroke stops the timer —
 consent has to be active, not merely unobjected-to. An autonomous action nobody can see coming is
-indistinguishable from a bug.
+indistinguishable from a bug, which is also why a card with a running timer is always the first card
+in the docket, ahead of anything with a higher score.
 
 By default nothing is sent anywhere. The corpus is somebody else's bug tracker and a demo has no
 business commenting on 1,000 open issues that real people are waiting on, so approving commits to a
@@ -308,7 +309,7 @@ scripts/
   tune-clusters.ts   where the similarity thresholds came from
   probe-docket.ts    the docket on the command line, without the interface
 data/                corpus, features, weights, eval — all committed
-tests/               47 tests, including the two named failure cases
+tests/               48 tests, including the two named failure cases
 ```
 
 [ARCHITECTURE.md](ARCHITECTURE.md) · [THESIS.md](THESIS.md) · [DEPLOY.md](DEPLOY.md)

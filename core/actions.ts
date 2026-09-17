@@ -80,7 +80,7 @@ function closeCall(issue: number, reason: 'completed' | 'not_planned'): Mutation
  * capped there, and the interface says so on the card rather than describing
  * every action as undoable.
  */
-const REVERSIBILITY: Record<Mutation['kind'], number> = {
+export const REVERSIBILITY: Record<Mutation['kind'], number> = {
   label: 0.97,
   unlabel: 0.97,
   milestone: 0.95,

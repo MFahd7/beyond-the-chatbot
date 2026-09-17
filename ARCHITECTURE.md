@@ -185,11 +185,19 @@ in the units that produced it rather than dismissed as "the algorithm".
 - **urgency** — kind-specific and asymmetric. A duplicate set still being filed into decays upward;
   a stale close does not decay at all, which is precisely why it should never outrank anything. An
   ask for a reproduction is worth more while the reporter still remembers the bug.
-- **reversibility** — added after the docket put "ask 115 reporters to retest" at the top of the
-  queue purely on reach, without noticing that approving it emails 115 strangers and cannot be taken
-  back. Applying 115 labels has comparable reach and costs nothing if wrong.
+- **reversibility** — a draft scores as its least reversible mutation, and the discount runs from
+  ×1.0 (labels) down to ×0.67 (anything that posts a comment). It was added because the first
+  docket ranked "ask 115 reporters to retest" purely on reach, without noticing that approving it
+  emails 115 strangers. The discount is deliberately a discount and not a veto: that sweep still
+  ranks second, because 115 reports against stale versions really is a lot of reach. An earlier
+  version also hardcoded sweep reversibility at 0.6, rating 115 comments as safer than one; sweeps
+  are now scored from their mutations like everything else.
 - **dead-end discount** — bounded at 35%, because the resolution model is AUC 0.698 and a 0.698
   model should not be allowed to bury anything outright.
+
+**Timed actions come first.** A card holding an action that will apply itself is placed above
+everything else, whatever its score. A 45-second countdown the operator never scrolls to is not a
+review, so the one card that can act without a keystroke is the one guaranteed to be seen.
 
 One formula, used everywhere. An earlier version computed the sweep score inline, which quietly
 exempted sweeps from the urgency, dead-end and reversibility terms that individual cases were

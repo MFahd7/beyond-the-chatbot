@@ -197,6 +197,16 @@ export function rank(input: RankInput): Ranked {
   }
 }
 
+/**
+ * The docket order. A card with an action on a timer comes first, whatever its
+ * expected value: it will act on its own, and a countdown the operator never
+ * scrolls to is not a review. Everything else is ordered by expected value.
+ */
+export function byAttention(a: Case, b: Case): number {
+  const timed = Number(b.autoAfter !== null) - Number(a.autoAfter !== null)
+  return timed !== 0 ? timed : byExpectedValue(a, b)
+}
+
 /** Sort cases by expected value, highest first. Ties break on fewer issues. */
 export function byExpectedValue(a: Case, b: Case): number {
   if (b.ev !== a.ev) return b.ev - a.ev

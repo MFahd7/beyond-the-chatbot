@@ -174,10 +174,24 @@ describe('determinism', () => {
     expect(a.cases.map((c) => c.ev)).toEqual(b.cases.map((c) => c.ev))
   })
 
-  it('orders by expected value', () => {
-    const evs = build().cases.map((c) => c.ev)
-    const sorted = [...evs].sort((x, y) => y - x)
-    expect(evs).toEqual(sorted)
+  it('puts timed actions first, then orders by expected value', () => {
+    const cases = build().cases
+    const timed = cases.filter((c) => c.autoAfter !== null)
+    expect(timed.length).toBeGreaterThan(0)
+    // Every card that will act on its own is reached before any that will not.
+    expect(cases.slice(0, timed.length).every((c) => c.autoAfter !== null)).toBe(true)
+    for (const group of [timed, cases.filter((c) => c.autoAfter === null)]) {
+      const evs = group.map((c) => c.ev)
+      expect(evs).toEqual([...evs].sort((x, y) => y - x))
+    }
+  })
+
+  it('rates a sweep that posts comments no more reversible than a comment', () => {
+    for (const kase of build().cases) {
+      if (kase.action.mutations.some((m) => m.kind === 'comment')) {
+        expect(kase.action.reversibility).toBeLessThanOrEqual(0.4)
+      }
+    }
   })
 })
 

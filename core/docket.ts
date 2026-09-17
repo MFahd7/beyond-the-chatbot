@@ -47,8 +47,8 @@ import type {
   TemplateFields,
   Weights,
 } from './types'
-import { AUTO_CONFIDENCE, draftAction } from './actions'
-import { byExpectedValue, impactOf, rank } from './attention'
+import { AUTO_CONFIDENCE, draftAction, REVERSIBILITY } from './actions'
+import { byAttention, impactOf, rank } from './attention'
 import { countOf, duration, issueRef } from './format'
 import { inferIntent, provenanceOf } from './intent'
 import { ageOf, daysBetween, RULE_THRESHOLDS } from './rules'
@@ -419,9 +419,10 @@ function buildSweep(
             members.length +
             ' label(s)' +
             (spec.kind === 'needs_repro' ? '; any posted comments were emailed' : ''),
-    // Routing is labels only, so the whole sweep comes off cleanly. The others
-    // contain comments, which do not.
-    reversibility: spec.kind === 'accepted_route' ? 0.97 : spec.kind === 'stale_close' ? 0.4 : 0.6,
+    // Scored like any other draft: by its least reversible mutation. An earlier
+    // version hardcoded 0.6 for sweeps that post comments, which rated emailing
+    // 115 reporters as safer than a single comment on a single issue.
+    reversibility: mutations.reduce((low, m) => Math.min(low, REVERSIBILITY[m.kind]), 1),
     autonomous,
   }
 
@@ -990,7 +991,7 @@ export function buildDocket(input: BuildInput): DocketResult {
     cases.push(kase)
   }
 
-  cases.sort(byExpectedValue)
+  cases.sort(byAttention)
   suppressed.sort((a, b) => b.ev - a.ev)
 
   const byKind: Record<string, number> = {}
