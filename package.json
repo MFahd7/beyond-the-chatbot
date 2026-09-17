@@ -1,0 +1,35 @@
+{
+  "name": "docket",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A decision docket for open-source issue triage. Replaces the issue list and the assistant, on the real Next.js backlog.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "data:fetch": "node scripts/fetch-corpus.mjs",
+    "data:build": "tsx scripts/build-corpus.ts",
+    "data:fit": "tsx scripts/fit-weights.ts",
+    "data:refresh": "npm run data:fetch && npm run data:build && npm run data:fit"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.125.0",
+    "next": "16.3.4",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "5.9.3",
+    "vitest": "^5.0.0",
+    "tsx": "^4.20.6"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  }
+}

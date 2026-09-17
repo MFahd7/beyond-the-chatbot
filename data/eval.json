@@ -1,0 +1,368 @@
+{
+  "fittedAt": "2026-09-17T07:20:08.515Z",
+  "repo": "vercel/next.js",
+  "note": "Every model is binary, balanced within each creation year, and scored on a held-out quarter of its own year-matched set -- so 50% is the honest baseline and the calendar carries no information. Features describe the submission only; nothing that accumulates after filing is used. See core/signals.ts.",
+  "resolution": {
+    "accuracy": 0.6342,
+    "baseline": 0.5,
+    "auc": 0.6975,
+    "brier": 0.2201,
+    "trainedOn": 1140,
+    "heldOut": 380,
+    "positiveClass": "not_planned",
+    "eraBalance": {
+      "2022": 100,
+      "2023": 100,
+      "2024": 100,
+      "2025": 66,
+      "2026": 14
+    },
+    "precision": 0.6143,
+    "recall": 0.7211,
+    "f1": 0.6634,
+    "topFor": [
+      {
+        "signalId": "repro.sandbox",
+        "weight": 0.6673
+      },
+      {
+        "signalId": "author.newcomer",
+        "weight": 0.4229
+      },
+      {
+        "signalId": "repro.present",
+        "weight": 0.3602
+      },
+      {
+        "signalId": "repro.github",
+        "weight": 0.3033
+      },
+      {
+        "signalId": "env.complete",
+        "weight": 0.2869
+      },
+      {
+        "signalId": "body.substantial",
+        "weight": 0.2107
+      }
+    ],
+    "topAgainst": [
+      {
+        "signalId": "template.none",
+        "weight": -0.668
+      },
+      {
+        "signalId": "repro.field_blank",
+        "weight": -0.3709
+      },
+      {
+        "signalId": "area.declared",
+        "weight": -0.3559
+      },
+      {
+        "signalId": "stack.present",
+        "weight": -0.2877
+      },
+      {
+        "signalId": "repro.field_absent",
+        "weight": -0.2731
+      },
+      {
+        "signalId": "title.specific",
+        "weight": -0.2528
+      }
+    ],
+    "shipped": true,
+    "verdict": "Ranking only -- never prepares an action. AUC 0.698 on a 0.50 baseline: directionally useful, and a mis-ranked case costs a scroll rather than a wrong comment on someone’s bug report."
+  },
+  "actions": {
+    "needs_repro": {
+      "accuracy": 0.6881,
+      "baseline": 0.5,
+      "auc": 0.7671,
+      "brier": 0.1975,
+      "trainedOn": 598,
+      "heldOut": 202,
+      "positiveClass": "needs_repro",
+      "eraBalance": {
+        "2021": 10,
+        "2022": 92,
+        "2023": 78,
+        "2024": 16,
+        "2025": 4,
+        "2026": 2
+      },
+      "precision": 0.6827,
+      "recall": 0.703,
+      "f1": 0.6927,
+      "topFor": [
+        {
+          "signalId": "author.newcomer",
+          "weight": 1.111
+        },
+        {
+          "signalId": "stack.present",
+          "weight": 1.0766
+        },
+        {
+          "signalId": "repro.field_blank",
+          "weight": 0.4622
+        },
+        {
+          "signalId": "body.substantial",
+          "weight": 0.4177
+        },
+        {
+          "signalId": "body.has_code",
+          "weight": 0.4045
+        },
+        {
+          "signalId": "repro.field_absent",
+          "weight": 0.269
+        }
+      ],
+      "topAgainst": [
+        {
+          "signalId": "template.none",
+          "weight": -1.4435
+        },
+        {
+          "signalId": "repro.github",
+          "weight": -0.7508
+        },
+        {
+          "signalId": "contrast.present",
+          "weight": -0.7251
+        },
+        {
+          "signalId": "steps.present",
+          "weight": -0.7235
+        },
+        {
+          "signalId": "repro.sandbox",
+          "weight": -0.7133
+        },
+        {
+          "signalId": "title.length",
+          "weight": -0.6139
+        }
+      ],
+      "shipped": true,
+      "verdict": "Shipped. AUC 0.767 clears the 0.65 bar set before fitting."
+    },
+    "verify_canary": {
+      "accuracy": 0.5946,
+      "baseline": 0.5,
+      "auc": 0.553,
+      "brier": 0.2635,
+      "trainedOn": 222,
+      "heldOut": 74,
+      "positiveClass": "verify_canary",
+      "eraBalance": {
+        "2021": 10,
+        "2022": 48,
+        "2023": 14,
+        "2024": 2
+      },
+      "precision": 0.5897,
+      "recall": 0.6216,
+      "f1": 0.6053,
+      "topFor": [
+        {
+          "signalId": "template.blank_sections",
+          "weight": 0.7828
+        },
+        {
+          "signalId": "repro.field_absent",
+          "weight": 0.6194
+        },
+        {
+          "signalId": "steps.present",
+          "weight": 0.5325
+        },
+        {
+          "signalId": "canary.box_ticked",
+          "weight": 0.5177
+        },
+        {
+          "signalId": "repro.placeholder",
+          "weight": 0.4274
+        },
+        {
+          "signalId": "body.has_code",
+          "weight": 0.3998
+        }
+      ],
+      "topAgainst": [
+        {
+          "signalId": "template.none",
+          "weight": -1.182
+        },
+        {
+          "signalId": "author.newcomer",
+          "weight": -0.8461
+        },
+        {
+          "signalId": "repro.present",
+          "weight": -0.6862
+        },
+        {
+          "signalId": "stack.present",
+          "weight": -0.6789
+        },
+        {
+          "signalId": "repro.sandbox",
+          "weight": -0.5723
+        },
+        {
+          "signalId": "repro.field_blank",
+          "weight": -0.5441
+        }
+      ],
+      "shipped": false,
+      "verdict": "Cut. AUC 0.553 is above chance but below the 0.65 bar set before fitting. Handled by a stated rule instead."
+    },
+    "stale_close": {
+      "accuracy": 0.6146,
+      "baseline": 0.5,
+      "auc": 0.6625,
+      "brier": 0.2305,
+      "trainedOn": 570,
+      "heldOut": 192,
+      "positiveClass": "stale_close",
+      "eraBalance": {
+        "2023": 26,
+        "2024": 162,
+        "2025": 4
+      },
+      "precision": 0.6038,
+      "recall": 0.6667,
+      "f1": 0.6337,
+      "topFor": [
+        {
+          "signalId": "repro.sandbox",
+          "weight": 0.7357
+        },
+        {
+          "signalId": "repro.present",
+          "weight": 0.7039
+        },
+        {
+          "signalId": "canary.box_ticked",
+          "weight": 0.5861
+        },
+        {
+          "signalId": "author.newcomer",
+          "weight": 0.4995
+        },
+        {
+          "signalId": "repro.github",
+          "weight": 0.4325
+        },
+        {
+          "signalId": "area.unsure",
+          "weight": 0.4231
+        }
+      ],
+      "topAgainst": [
+        {
+          "signalId": "area.declared",
+          "weight": -0.8965
+        },
+        {
+          "signalId": "repro.field_blank",
+          "weight": -0.7498
+        },
+        {
+          "signalId": "template.none",
+          "weight": -0.6221
+        },
+        {
+          "signalId": "stack.present",
+          "weight": -0.534
+        },
+        {
+          "signalId": "body.substantial",
+          "weight": -0.4397
+        },
+        {
+          "signalId": "version.canary",
+          "weight": -0.3334
+        }
+      ],
+      "shipped": false,
+      "verdict": "Shipped. AUC 0.662 clears the 0.65 bar set before fitting."
+    },
+    "accepted_route": {
+      "accuracy": 0.7092,
+      "baseline": 0.5,
+      "auc": 0.775,
+      "brier": 0.1962,
+      "trainedOn": 590,
+      "heldOut": 196,
+      "positiveClass": "accepted_route",
+      "eraBalance": {
+        "2024": 86,
+        "2025": 100,
+        "2026": 10
+      },
+      "precision": 0.6541,
+      "recall": 0.8878,
+      "f1": 0.7532,
+      "topFor": [
+        {
+          "signalId": "version.canary",
+          "weight": 0.8763
+        },
+        {
+          "signalId": "area.declared",
+          "weight": 0.8681
+        },
+        {
+          "signalId": "steps.present",
+          "weight": 0.5889
+        },
+        {
+          "signalId": "stack.present",
+          "weight": 0.5182
+        },
+        {
+          "signalId": "env.complete",
+          "weight": 0.415
+        },
+        {
+          "signalId": "body.substantial",
+          "weight": 0.415
+        }
+      ],
+      "topAgainst": [
+        {
+          "signalId": "author.newcomer",
+          "weight": -0.9146
+        },
+        {
+          "signalId": "repro.field_blank",
+          "weight": -0.5846
+        },
+        {
+          "signalId": "contrast.present",
+          "weight": -0.483
+        },
+        {
+          "signalId": "canary.box_ticked",
+          "weight": -0.4646
+        },
+        {
+          "signalId": "title.length",
+          "weight": -0.4315
+        },
+        {
+          "signalId": "body.has_code",
+          "weight": -0.3823
+        }
+      ],
+      "shipped": true,
+      "verdict": "Shipped. AUC 0.775 clears the 0.65 bar set before fitting."
+    }
+  }
+}

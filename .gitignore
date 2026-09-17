@@ -1,0 +1,18 @@
+node_modules
+.next
+out
+.env
+.env.local
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+
+# Raw API pages. Large, re-fetchable, and superseded by data/corpus.json,
+# which is committed so a clean clone runs with no network and no token.
+data/raw/
+
+# Reference clone of the sibling project, kept locally while building.
+/repo/
+
+# Fetch logs.
+data/raw-fetch.log
