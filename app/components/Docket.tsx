@@ -636,7 +636,7 @@ function SignalLine({ signal }: { signal: DocketResponse['cases'][number]['signa
       <div className="signalLabel">{signal.label}</div>
       <div className={'push ' + cls} title={signal.weight !== undefined ? 'weight ' + signal.weight : undefined}>
         {push === undefined
-          ? percent(signal.value * signal.confidence)
+          ? percent(signal.value)
           : (push > 0 ? '+' : '') + push.toFixed(2)}
       </div>
       <div className="signalEvidence">{signal.evidence}</div>

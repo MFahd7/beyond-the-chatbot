@@ -735,8 +735,16 @@ kbd {
 
 .compare {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* minmax(0, ...) is load-bearing. With plain 1fr, the long unwrapped issue
+     titles in the list pane set a min-content width wider than the screen, the
+     grid honoured it, and the docket pane collapsed to a sliver. */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 16px;
+}
+
+.pane,
+.compare > * {
+  min-width: 0;
 }
 
 @media (max-width: 900px) {

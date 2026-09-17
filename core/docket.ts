@@ -353,6 +353,7 @@ function buildSweep(
   model: OperatorModel,
   now: Date,
   features?: Record<number, Record<string, Signal>>,
+  currentRelease?: string,
 ): Case {
   // Which fitted signals actually put this set together, by how many members
   // they drove. This is what the card shows as evidence and what a rejection
@@ -367,7 +368,6 @@ function buildSweep(
     .map(([id]) => id)
   const issues = members.map((m) => m.issue)
   const byEngagement = [...members].sort((a, b) => engagementOf(b.issue) - engagementOf(a.issue))
-  const current = members[0]
 
   const mutations: DraftAction['mutations'] = []
   let autoCount = 0
@@ -380,7 +380,7 @@ function buildSweep(
       confidence: member.confidence,
       linesBehind: member.linesBehind,
       idleDays: member.idleDays,
-      currentVersion: current ? String(current.linesBehind) : undefined,
+      currentVersion: currentRelease,
     })
     mutations.push(...draft.mutations)
     if (draft.autonomous.length > 0) autoCount++
@@ -869,7 +869,7 @@ export function buildDocket(input: BuildInput): DocketResult {
       }
       continue
     }
-    sweeps.push(buildSweep(spec, members, model, now, corpus.features))
+    sweeps.push(buildSweep(spec, members, model, now, corpus.features, current))
   }
 
   // Areas too small for their own sweep are pooled by owning team, so every
@@ -909,6 +909,7 @@ export function buildDocket(input: BuildInput): DocketResult {
         model,
         now,
         corpus.features,
+        current,
       ),
     )
   }
@@ -937,6 +938,7 @@ export function buildDocket(input: BuildInput): DocketResult {
         model,
         now,
         corpus.features,
+        current,
       ),
     )
   }

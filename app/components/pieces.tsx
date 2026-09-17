@@ -86,7 +86,7 @@ export function SignalRow({ signal }: { signal: WireSignal }) {
       <div className="signalLabel">{signal.label}</div>
       <div className={'push ' + cls}>
         {push === undefined
-          ? Math.round(signal.value * signal.confidence * 100) + '%'
+          ? Math.round(signal.value * 100) + '%'
           : (push > 0 ? '+' : '') + push.toFixed(2)}
       </div>
       <div className="signalEvidence">{signal.evidence}</div>
