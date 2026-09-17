@@ -237,8 +237,11 @@ Five reject reasons, each editing a different part of the model; see the README 
 ## What we did not fix
 
 **Clustering has no ground truth.** Ten of twelve clusters are genuine duplicates on manual
-inspection. The two that are not are related-but-distinct bugs — `[SRI] integrity missing for client
-chunks` and `for stylesheets` — and they are left in the demo on purpose. The honest fix is comment
+inspection. The two that are not are related-but-distinct bugs that share vocabulary — `[SRI]
+integrity missing for client chunks` / `for stylesheets`, and two server-action reports — and the
+SRI pair is left in the demo on purpose, since it illustrates exactly what similarity gets wrong.
+A further two clusters fall below the 0.42 confidence floor on cohesion alone and are withheld, so
+the docket shows 10 of the 12. The honest fix is comment
 threads, which the search API will not return.
 
 **The resolution model is weak.** AUC 0.698 on a 0.50 baseline. Predicting whether a bug report

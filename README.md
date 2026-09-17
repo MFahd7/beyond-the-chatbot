@@ -96,7 +96,7 @@ flowchart TD
   C["29 signals per issue<br/>SUBMISSION ONLY — nothing that accrues after filing"] --> D & E & F
   D["Fitted models<br/>needs_repro · accepted_route · resolution<br/>year-matched, held out"] --> G
   E["Stated rules<br/>stale · verify_canary<br/>thresholds read off the backlog"] --> G
-  F["Unsupervised clustering<br/>TF-IDF cosine + title trigrams<br/>10 duplicate sets"] --> G
+  F["Unsupervised clustering<br/>TF-IDF cosine + title trigrams<br/>12 sets found, 10 above the floor"] --> G
   G["Intent + margin to the runner-up"] --> H
   H["Rank: impact x confidence x urgency x reversibility / effort<br/>engagement, age and dupe counts enter ONLY here"] --> I
   I["One prepared decision<br/>headline · evidence with signed weights · exact REST calls · undo cost"] --> J
@@ -228,8 +228,8 @@ Four guarantees, each with a test in
 4. **Nothing vanishes.** Covered + withheld = the whole backlog, asserted on the real corpus.
 
 There is also a wrong guess sitting in the live demo on purpose. `[SRI] integrity missing for
-client chunks` (#74147) and `for stylesheets` (#74149) cluster at cohesion 0.54 and are *related but
-genuinely separate* bugs. It is a good illustration of what unsupervised similarity gets wrong, and
+client chunks` (#74147) and `for stylesheets` (#74149) cluster at cohesion 0.54 — comfortably
+above the floor — and are *related but genuinely separate* bugs. It is a good illustration of what unsupervised similarity gets wrong, and
 of what `1` then does about it.
 
 ---
