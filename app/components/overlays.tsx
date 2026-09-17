@@ -107,7 +107,7 @@ export function Compare({
                       <div className="push flat">
                         {signal.push !== undefined
                           ? (signal.push > 0 ? '+' : '') + signal.push.toFixed(2)
-                          : percent(signal.value * signal.confidence)}
+                          : percent(signal.value)}
                       </div>
                       <div className="signalEvidence">{signal.evidence}</div>
                     </div>
