@@ -145,3 +145,26 @@ describe('failure A: the reading was wrong', () => {
     expect(down).toBeGreaterThan(up * 3)
   })
 })
+
+describe('failure A on a rule-driven card', () => {
+  it('never records a correction that changes nothing', () => {
+    // The first card in the live demo is a rule-driven sweep. Rejecting it as
+    // misread used to report "distrusted 0 signals" and leave the model as it was.
+    const rule = build().cases.find((kase) => kase.provenance.source === 'rule')
+    expect(rule).toBeDefined()
+    if (!rule) return
+
+    const { model, event, summary } = applyFeedback({
+      model: emptyModel(),
+      target: { ...targetOf(rule), drivers: ['rule.lines_behind', 'sweep.size'] },
+      verdict: 'reject',
+      reason: 'wrong_situation',
+      now: builtAt(),
+    })
+
+    expect(event.adjustments.length).toBeGreaterThan(0)
+    expect(model.kindInterest[rule.kind]).toBeLessThan(1)
+    expect(summary.join(' ')).toContain('stated rule')
+    expect(summary.join(' ')).not.toContain('0 signal')
+  })
+})

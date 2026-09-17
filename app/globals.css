@@ -1009,6 +1009,27 @@ kbd {
 }
 
 @media (max-width: 620px) {
+  .topbar {
+    gap: 8px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .topbar .optional {
+    display: none;
+  }
+
+  .issues .meta {
+    white-space: normal;
+    width: auto;
+    text-align: left;
+  }
+
+  .issues,
+  .issues td {
+    word-break: break-word;
+  }
+
   .headline {
     font-size: 22px;
   }

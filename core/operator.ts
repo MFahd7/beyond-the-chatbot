@@ -31,6 +31,9 @@
  */
 
 import type { Case, CaseKind, FeedbackEvent, OperatorModel, RejectReason, Verdict } from './types'
+import { FITTED_SIGNAL_IDS } from './signals'
+
+const FITTED = new Set<string>(FITTED_SIGNAL_IDS)
 
 /**
  * The minimum a correction needs to know about what it is correcting.
@@ -192,7 +195,22 @@ export function applyFeedback(input: FeedbackInput): FeedbackResult {
 
     switch (reason) {
       case 'wrong_situation': {
-        const drove = target.drivers
+        // Only signals a fitted model reads can be distrusted to any effect.
+        // A stated rule or a sweep's grouping rows feed no model, and the live
+        // demo's first card is exactly that: rejecting it once reported
+        // "distrusted 0 signals" and changed nothing, while the operator
+        // believed they had taught the system something.
+        const drove = target.drivers.filter((id) => FITTED.has(id))
+        if (drove.length === 0) {
+          move(model.kindInterest, target.kind, DEMOTE_KIND, 'misread, and no learned signal to blame', adjustments)
+          summary.push(
+            'This came from a stated rule, not a fitted model, so there were no learned signals to ' +
+              'distrust. The rule itself was demoted instead: "' +
+              target.kind +
+              '" now needs a stronger case to reach the top.',
+          )
+          break
+        }
         for (const signalId of drove) {
           move(
             model.signalTrust,

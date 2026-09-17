@@ -80,7 +80,7 @@ export interface WireCase {
   issues: WireIssue[]
   /** Every candidate action considered, so the card can show the runner-up. */
   alternatives: { intent: string; probability: number }[]
-  sweep: { count: number; basis: string; autoCount: number } | null
+  sweep: { count: number; basis: string; autoCount: number; drivers: string[] } | null
 }
 
 export interface WireSuppressed {

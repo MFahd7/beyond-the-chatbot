@@ -9,7 +9,7 @@ at a time, with the evidence, the exact API calls it would send, and what it cos
 
 Built for the [DOO Builders League "Beyond the Chatbot" challenge](https://build.doo.ooo/challenges/beyond-the-chatbot).
 
-- **Live demo:** _to be filled in after the Vercel import — see [DEPLOY.md](DEPLOY.md)_
+- **Live demo:** https://beyond-the-chatbot-hazel.vercel.app
 - **Repository:** https://github.com/MFahd7/beyond-the-chatbot
 
 ---
@@ -52,7 +52,7 @@ npm run dev          # http://localhost:3000
 ```
 
 ```bash
-npm test             # 46 tests, including both named failure cases
+npm test             # 47 tests, including both named failure cases
 npm run typecheck
 npm run build
 ```
@@ -308,7 +308,7 @@ scripts/
   tune-clusters.ts   where the similarity thresholds came from
   probe-docket.ts    the docket on the command line, without the interface
 data/                corpus, features, weights, eval — all committed
-tests/               46 tests, including the two named failure cases
+tests/               47 tests, including the two named failure cases
 ```
 
 [ARCHITECTURE.md](ARCHITECTURE.md) · [THESIS.md](THESIS.md) · [DEPLOY.md](DEPLOY.md)

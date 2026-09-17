@@ -133,7 +133,12 @@ function wireCase(kase: Case, corpus: Corpus, now: Date): WireCase {
       .filter((s) => s.intent !== kase.inference.top)
       .map((s) => ({ intent: s.intent, probability: s.probability })),
     sweep: kase.sweep
-      ? { count: kase.sweep.count, basis: kase.sweep.basis, autoCount: kase.sweep.autoCount }
+      ? {
+          count: kase.sweep.count,
+          basis: kase.sweep.basis,
+          autoCount: kase.sweep.autoCount,
+          drivers: kase.sweep.drivers,
+        }
       : null,
   }
 }

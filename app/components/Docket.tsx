@@ -197,10 +197,12 @@ export function Docket() {
         target: {
           id: current.id,
           kind: current.kind,
-          drivers: current.signals
-            .filter((s) => (s.push ?? 0) > 0)
-            .slice(0, 3)
-            .map((s) => s.id),
+          drivers: current.sweep?.drivers.length
+            ? current.sweep.drivers
+            : current.signals
+                .filter((s) => (s.push ?? 0) > 0)
+                .slice(0, 3)
+                .map((s) => s.id),
           temporal: current.signals.filter((s) => s.kind === 'temporal').map((s) => s.id),
           areas: current.issues.flatMap((issue) => issue.areas),
         },
@@ -336,8 +338,8 @@ export function Docket() {
     <div className="shell">
       <header className="topbar">
         <span className="wordmark">DOCKET</span>
-        <span className="sep">/</span>
-        <a href={'https://github.com/' + data.meta.repo + '/issues'} target="_blank" rel="noreferrer">
+        <span className="sep optional">/</span>
+        <a className="optional" href={'https://github.com/' + data.meta.repo + '/issues'} target="_blank" rel="noreferrer">
           {data.meta.repo}
         </a>
         <span className="sep">·</span>
@@ -349,8 +351,8 @@ export function Docket() {
         <span>
           <strong style={{ color: 'var(--text)' }}>{stats.cases}</strong> decisions
         </span>
-        <span className="sep">·</span>
-        <span>
+        <span className="sep optional">·</span>
+        <span className="optional">
           {stats.decisions} judgments, {stats.sweeps} sweeps
         </span>
         <span className="grow" />
